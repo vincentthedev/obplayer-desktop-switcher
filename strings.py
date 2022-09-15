@@ -1,0 +1,1 @@
+help_text = "Using this tool you can enable, or disable booting to the desktop on startup."
