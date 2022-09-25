@@ -45,7 +45,7 @@ else:
 
             self._grid = Gtk.Grid()
             self._enable_btn = Gtk.Button(label="Enable")
-            help(self._enable_btn)
+
             #set_focus_vadjustment(Gtk.Align.START)
             self._disable_btn = Gtk.Button(label="Disable")
 
