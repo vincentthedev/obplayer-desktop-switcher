@@ -4,6 +4,8 @@ import sys
 import argparse
 
 def desktop_toggle(state=None, running_on_desktop=None):
+    files = ["/home/obsuser/.config/autostart/desktop_startup.desktop",
+            "/usr/share/lightdm/lightdm.conf.d/60-lightdm-gtk-greeter.conf"]
     # If the state is true enable desktop.
     if state == None: pass
 
@@ -13,6 +15,21 @@ def desktop_toggle(state=None, running_on_desktop=None):
             os.system('pkexec systemctl set-default multi-user')
         else:
             os.system('pkexec systemctl set-default graphical.target')
+            FILE=files[0]
+            with open(FILE, "w") as file:
+                file.write("""[Desktop Entry]
+                Version=1.0
+                Name=Desktop Startup
+                Comment=Desktop Startup
+                Exec=/usr/local/bin/desktop_startup.sh
+                Terminal=true
+                Type=Application
+                Hidden=false""")
+            FILE=files[1]
+            with open(FILE, "w") as file:
+                file.write("""[SeatDefaults]
+                            greeter-session=lightdm-gtk-greeter
+                            autologin-user=obsuser""")
     else:
         pass
 
